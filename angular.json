@@ -20,6 +20,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "baseHref": "/flashcards-angular/",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -27,6 +28,10 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets"
               }
             ],
             "styles": [
