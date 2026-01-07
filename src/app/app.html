@@ -8,20 +8,19 @@
     File
   </button>
 
-  
-  
-
 </mat-toolbar>
 
 <mat-menu #fileMenu="matMenu">
 
-  <button mat-menu-item>
-    <mat-icon>add</mat-icon>
-    <span>New Deck</span>
-  </button>
-
+  <fc-new-deck-button />
   <fc-open-deck-button />
 
 </mat-menu>
+
+
+
+
+
+
 
 <router-outlet />
