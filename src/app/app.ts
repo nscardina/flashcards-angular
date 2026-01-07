@@ -4,7 +4,7 @@ import {MatToolbar} from '@angular/material/toolbar';
 import { MatMenuModule } from "@angular/material/menu"
 import { MatButtonModule } from "@angular/material/button"
 import { MatIconModule } from "@angular/material/icon"
-import { FileUpload } from "./file-upload/file-upload";
+import { FileUpload } from "./open-deck-button/open-deck-button";
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

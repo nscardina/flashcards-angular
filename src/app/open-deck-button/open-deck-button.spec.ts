@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FileUpload } from './file-upload';
+import { FileUpload } from './open-deck-button';
 
 describe('FileUpload', () => {
   let component: FileUpload;

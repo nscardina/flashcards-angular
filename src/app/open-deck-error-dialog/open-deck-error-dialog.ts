@@ -3,10 +3,10 @@ import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { MatButtonModule } from "@angular/material/button"
 
 @Component({
-  selector: 'app-file-format-error-dialog',
+  selector: 'fc-open-deck-error-dialog',
   imports: [ MatDialogModule, MatButtonModule ],
-  templateUrl: './file-format-error-dialog.html',
-  styleUrl: './file-format-error-dialog.scss',
+  templateUrl: './open-deck-error-dialog.html',
+  styleUrl: './open-deck-error-dialog.scss',
 })
 export class FileFormatErrorDialog {
   

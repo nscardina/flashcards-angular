@@ -5,18 +5,18 @@ import { MatIconModule } from "@angular/material/icon"
 import { DeckState } from '../deck-state';
 import { MatMenuModule } from "@angular/material/menu"
 import { MatDialog } from '@angular/material/dialog';
-import { FileFormatErrorDialog } from '../file-format-error-dialog/file-format-error-dialog';
+import { FileFormatErrorDialog } from '../open-deck-error-dialog/open-deck-error-dialog';
 
 @Component({
-  selector: 'fc-file-upload',
+  selector: 'fc-open-deck-button',
   imports: [
     MatButtonModule,
     MatInputModule,
     MatIconModule,
     MatMenuModule
   ],
-  templateUrl: './file-upload.html',
-  styleUrl: './file-upload.scss',
+  templateUrl: './open-deck-button.html',
+  styleUrl: './open-deck-button.scss',
 })
 export class FileUpload {
 

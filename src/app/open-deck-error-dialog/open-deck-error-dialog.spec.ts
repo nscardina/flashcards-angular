@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FileFormatErrorDialog } from './file-format-error-dialog';
+import { FileFormatErrorDialog } from './open-deck-error-dialog';
 
 describe('FileFormatErrorDialog', () => {
   let component: FileFormatErrorDialog;
