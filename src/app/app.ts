@@ -8,6 +8,7 @@ import { FileUpload } from "./open-deck-button/open-deck-button";
 import { MatDialog } from '@angular/material/dialog';
 import { NewDeckButton } from "./new-deck-button/new-deck-button";
 import { CardDisplay } from './card-display/card-display';
+import { DeckInteractionArea } from './deck-interaction-area/deck-interaction-area';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,7 @@ import { CardDisplay } from './card-display/card-display';
     MatIconModule, 
     FileUpload, 
     NewDeckButton,
-    CardDisplay
+    DeckInteractionArea
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
