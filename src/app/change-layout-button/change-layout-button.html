@@ -1,0 +1,16 @@
+<button mat-menu-item [matMenuTriggerFor]="changeLayoutMenu">
+    <mat-icon>auto_awesome_mosaic</mat-icon>
+    <span>Change Layout</span>
+</button>
+
+<mat-menu #changeLayoutMenu="matMenu" xPosition="after">
+
+    @for(layout of CardLayout; track layout) {
+        <button mat-menu-item (click)="setLayout(layout.layout)">
+            {{layout.text}}
+        </button>
+    }
+
+    
+    
+</mat-menu>

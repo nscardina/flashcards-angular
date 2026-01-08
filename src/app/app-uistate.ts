@@ -3,6 +3,8 @@ import { DeckState } from './deck-state';
 import { Side } from './deck/side';
 import { CardFace } from './deck/CardFace';
 import { Card } from './deck/Card';
+import AppMode from './AppMode';
+import CardLayout from './deck/cardlayout';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +17,14 @@ export class AppUIState {
 
   #sideVisible: WritableSignal<Side> = signal(Side.FRONT)
 
+  #appMode: WritableSignal<AppMode> = signal(AppMode.MANAGING_FILES)
+
   cardVisible = this.#cardVisible.asReadonly()
 
   sideVisible = this.#sideVisible.asReadonly()
+
+  appMode = this.#appMode.asReadonly()
+
 
   setVisibleCardIndex(index: number) {
     // if the provided card index is valid for the current deck, 
@@ -48,6 +55,14 @@ export class AppUIState {
 
   getCurrentVisibleCard(): Card | null {
     return this.#deckState.deck()?.cards.at(this.#cardVisible()) ?? null
+  }
+
+  setAppMode(mode: AppMode) {
+    this.#appMode.set(mode)
+  }
+
+  setLayoutCurrentCard(layout: CardLayout) {
+    this.#deckState.setLayout(this.#cardVisible(), this.#sideVisible(), layout)
   }
   
 }

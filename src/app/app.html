@@ -8,12 +8,22 @@
     File
   </button>
 
+  <button mat-button [matMenuTriggerFor]="editMenu">
+    Edit
+  </button>
+
 </mat-toolbar>
 
 <mat-menu #fileMenu="matMenu">
 
   <fc-new-deck-button />
   <fc-open-deck-button />
+
+</mat-menu>
+
+<mat-menu #editMenu="matMenu">
+
+  <fc-change-layout-button />
 
 </mat-menu>
 

@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'fc-deck-interaction-area',
   imports: [
     CardDisplay,
-    MatMiniFabButton,
+    MatButtonModule,
     MatIconModule
 ],
   templateUrl: './deck-interaction-area.html',

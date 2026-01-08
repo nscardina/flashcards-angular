@@ -1,5 +1,7 @@
 import { Injectable, isDevMode, signal, WritableSignal } from '@angular/core';
 import { Deck } from './deck/deck';
+import CardLayout from './deck/cardlayout';
+import { Side } from './deck/side';
 
 @Injectable({
   providedIn: 'root',
@@ -39,5 +41,32 @@ export class DeckState {
     console.warn("Invalid deck file uploaded.")
     return false // did not load deck
     
+  }
+
+  setLayout(cardIndex: number, side: Side, layout: CardLayout): boolean {
+    const deck = this.#deck()
+    if (deck !== null && cardIndex < deck.cards.length) {
+      this.#deck.set({ 
+        ...deck,
+        cards: [
+          ...deck.cards.slice(0, cardIndex),
+          {
+            front: (side === Side.FRONT) ? {
+              ...deck.cards[cardIndex].front,
+              layout: layout
+            } : deck.cards[cardIndex].front,
+
+            back: (side === Side.BACK) ? {
+              ...deck.cards[cardIndex].back,
+              layout: layout
+            } : deck.cards[cardIndex].back
+          },
+          ...deck.cards.slice(cardIndex + 1)
+        ]
+      })
+      return true
+    } else {
+      return false
+    }
   }
 }

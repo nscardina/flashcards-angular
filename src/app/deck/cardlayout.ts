@@ -46,4 +46,25 @@ enum CardLayout {
     FOUR_BOXES = "card-layout-four-boxes"
 }
 
+export const getText = (layout: CardLayout) => {
+    switch (layout) {
+        case CardLayout.ONE_BOX:
+            return "One box"
+        case CardLayout.TWO_BOXES_V:
+            return "Two vertical boxes"
+        case CardLayout.TWO_BOXES_H:
+            return "Two horizontal boxes"
+        case CardLayout.FOUR_BOXES:
+            return "Four boxes"
+        case CardLayout.ONE_BOX_LV_TWO_BOXES_RV:
+            return "One vertical box on left, two horizontal boxes on right"
+        case CardLayout.ONE_BOX_RV_TWO_BOXES_LV:
+            return "One vertical box on right, two horizontal boxes on left"
+        case CardLayout.ONE_BOX_TH_TWO_BOXES_BH:
+            return "One horizontal box on top, two vertical boxes on bottom"
+        case CardLayout.ONE_BOX_BH_TWO_BOXES_TH:
+            return "One horizontal box on bottom, two vertical boxes on top"
+    }
+}
+
 export default CardLayout

@@ -2,6 +2,7 @@
     // Properties affecting this element
     container: deck-interaction-area / size;
     flex-grow: 1;
+    padding: 1rem;
 
     // Properties affecting children
     display: grid;
@@ -13,11 +14,6 @@
 #card-display-container,
 #forward-button-container {
     min-height: max-content;
-}
-
-#back-button-container,
-#forward-button-container {
-    padding: 1rem;
 }
 
 #back-button-container {
@@ -44,7 +40,7 @@
 @media screen and (min-width: 600px) {
 
     :host {
-        grid-template-columns: auto max-content auto;
+        grid-template-columns: min-content 1fr min-content;
         grid-template-rows: auto;
     }
 
@@ -52,7 +48,8 @@
         // Over 600px, appears on left side of screen
         order: 1;
         
-        height: min-content;
+        // height: min-content;
+        // margin: 0px;
     }
 
     #card-display-container {
@@ -62,13 +59,14 @@
         order: 2;
         grid-column: 2 / 3;
 
-        width: calc(100cqw - 10rem);
+        // width: calc(100cqw - 5rem);
+        // width: auto;
         aspect-ratio: 5 / 3;
     }
 
-    @container deck-interaction-area (min-width: calc(4rem + 100cqh * 5 / 3)) {
+    @container deck-interaction-area (min-width: calc(100cqh * 5 / 3)) {
         #card-display-container {
-            width: calc(100cqh * 5 / 3);
+            // width: calc(100cqh * 5 / 3);
         }
     }
 
@@ -76,6 +74,6 @@
         // Over 600px, appears on right side of screen
         order: 3;
         grid-column: 3 / 4;
-        height: min-content;
+        // height: min-content;
     }
 }
