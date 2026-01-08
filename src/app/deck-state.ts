@@ -5,7 +5,7 @@ import { Deck } from './deck/deck';
   providedIn: 'root',
 })
 export class DeckState {
-  #deck: WritableSignal<Deck | null> = signal(null)
+  #deck: WritableSignal<Deck | null> = signal(Deck.makeDefault())
 
   readonly deck = this.#deck.asReadonly()
 

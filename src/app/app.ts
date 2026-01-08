@@ -7,6 +7,7 @@ import { MatIconModule } from "@angular/material/icon"
 import { FileUpload } from "./open-deck-button/open-deck-button";
 import { MatDialog } from '@angular/material/dialog';
 import { NewDeckButton } from "./new-deck-button/new-deck-button";
+import { CardDisplay } from './card-display/card-display';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ import { NewDeckButton } from "./new-deck-button/new-deck-button";
     MatButtonModule, 
     MatIconModule, 
     FileUpload, 
-    NewDeckButton
+    NewDeckButton,
+    CardDisplay
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'

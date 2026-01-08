@@ -1,0 +1,192 @@
+@use "sass:list";
+@use "sass:map";
+
+@keyframes fc-hide {
+    0% { transform: rotateY(0deg); }
+    50% { transform: rotateY(90deg); }
+    51% { transform: rotateY(91deg); display: none; }
+    100% { transform: rotateY(180deg); display: none; }
+}
+
+@keyframes fc-show {
+    0% { transform: rotateY(180deg); display: none; }
+    50% { transform: rotateY(90deg); display: none; }
+    51% { transform: rotateY(89deg); }
+    100% { transform: rotateY(0deg); }
+}
+
+:host {
+    animation-name: fc-show;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+
+    &.rotated {
+        animation-name: fc-hide;
+        animation-timing-function: ease-in;
+    }
+}
+
+@mixin -box-properties() {
+    display: grid;
+    gap: 1rem;
+
+    * {
+        overflow-wrap: anywhere;
+    }
+
+    .dropdown-menu.show {
+        display: block !important;
+    }
+
+    .flashcard-display-box-container {
+        overflow-y: auto;
+        max-width: 100%;
+        max-height: 100%;
+        
+    }
+
+    img.flashcard-display-box-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+$-half-area-dim: calc(50% - 0.5rem);
+$-whole-area-dim: calc(2 * $-half-area-dim);
+
+@mixin -visibleBoxes($numBoxes) {
+    @for $i from calc(($numBoxes + 1)) to 5 {
+        *:nth-child(#{$i} of fc-card-box),
+        .flashcard-x-button-#{$i} {
+            display: none !important;
+        }
+    }
+}
+
+@mixin -box($number, $x, $y, $width, $height) {
+    .flashcard-x-button-#{$number} {
+        position: absolute;
+        left: calc($x + $width - 0.5rem);
+        top: calc($y + 0.5rem);
+    }
+}
+
+@mixin -assign-grid-areas($number) {
+
+    $letters: (a b c d);
+
+    @for $i from 1 through $number {
+        *:nth-child(#{$i} of .flashcard-box) {
+            grid-area: list.nth($letters, $i);
+        }
+    }
+}
+
+:host.card-layout-one-box,
+:host.card-layout-two-boxes-v,
+:host.card-layout-two-boxes-h,
+:host.card-layout-one-box-bh-two-boxes-th,
+:host.card-layout-one-box-th-two-boxes-bh,
+:host.card-layout-one-box-lv-two-boxes-rv,
+:host.card-layout-one-box-rv-two-boxes-lv,
+:host.card-layout-four-boxes {
+    @include -box-properties();
+}
+
+:host.card-layout-one-box {
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+
+    @include -visibleBoxes(1);
+    @include -box(1, 0rem, 0rem, $-whole-area-dim, $-whole-area-dim);
+}
+
+:host.card-layout-two-boxes-v {
+    grid-template-columns: $-half-area-dim $-half-area-dim;
+    grid-template-rows: calc($-whole-area-dim + 1rem);
+
+    @include -visibleBoxes(2);
+    @include -box(1, 0rem, 0rem, $-half-area-dim, $-whole-area-dim);
+    @include -box(2, 0rem, 0rem, $-whole-area-dim, $-whole-area-dim);
+}
+
+:host.card-layout-two-boxes-h {
+    grid-template-columns: calc($-whole-area-dim + 1rem);
+    grid-template-rows: $-half-area-dim $-half-area-dim;
+
+    @include -visibleBoxes(2);
+    @include -box(1, 0rem, 0rem, $-whole-area-dim, $-half-area-dim);
+    @include -box(2, 0rem, $-half-area-dim, $-whole-area-dim, $-whole-area-dim);
+}
+
+:host.card-layout-four-boxes {
+    @include -visibleBoxes(4);
+
+    grid-template:
+        "a b" 
+        "c d";
+    grid-template-columns: calc(50% - 0.5rem) calc(50% - 0.5rem);
+    grid-template-rows: calc(50% - 0.5rem) calc(50% - 0.5rem);
+
+    @include -box(1, 0rem, 0rem, calc($-half-area-dim), calc($-half-area-dim));
+    @include -box(2, calc($-half-area-dim), 0rem, calc($-half-area-dim), calc($-half-area-dim));
+    @include -box(3, 0rem, calc($-half-area-dim), calc($-half-area-dim), calc($-half-area-dim));
+    @include -box(4, calc($-half-area-dim), calc($-half-area-dim), calc($-half-area-dim), calc($-half-area-dim));
+}
+
+:host.card-layout-one-box-lv-two-boxes-rv {
+    grid-template:
+        "a b"
+        "a c";
+    grid-template-rows: calc(50% - 0.5rem) calc(50% - 0.5rem);
+    grid-template-columns: calc(50% - 0.5rem) calc(50% - 0.5rem);
+
+    @include -visibleBoxes(3);
+    @include -assign-grid-areas(3);
+    @include -box(1, 0rem, 0rem, $-half-area-dim, $-whole-area-dim);
+    @include -box(2, $-half-area-dim, 0rem, $-half-area-dim, $-half-area-dim);
+    @include -box(3, $-half-area-dim, $-half-area-dim, $-half-area-dim, $-half-area-dim);
+}
+
+:host.card-layout-one-box-rv-two-boxes-lv {
+    grid-template:
+        "a b"
+        "c b";
+    grid-template-rows: calc(50% - 0.5rem) calc(50% - 0.5rem);
+    grid-template-columns: calc(50% - 0.5rem) calc(50% - 0.5rem);
+
+    @include -visibleBoxes(3);
+    @include -assign-grid-areas(3);
+    @include -box(1, 0rem, 0rem, $-half-area-dim, $-half-area-dim);
+    @include -box(2, $-half-area-dim, 0rem, $-half-area-dim, $-whole-area-dim);
+    @include -box(3, 0rem, $-half-area-dim, $-half-area-dim, $-half-area-dim);
+}
+
+:host.card-layout-one-box-th-two-boxes-bh {
+    grid-template:
+        "a a"
+        "b c";
+    grid-template-rows: calc(50% - 0.5rem) calc(50% - 0.5rem);
+    grid-template-columns: calc(50% - 0.5rem) calc(50% - 0.5rem);
+
+    @include -visibleBoxes(3);
+    @include -assign-grid-areas(3);
+    @include -box(1, 0rem, 0rem, $-whole-area-dim, $-half-area-dim);
+    @include -box(2, 0rem, $-half-area-dim, $-half-area-dim, $-half-area-dim);
+    @include -box(3, $-half-area-dim, $-half-area-dim, $-half-area-dim, $-half-area-dim);
+}
+
+:host.card-layout-one-box-bh-two-boxes-th {
+    grid-template:
+        "a b"
+        "c c";
+    grid-template-rows: calc(50% - 0.5rem) calc(50% - 0.5rem);
+    grid-template-columns: calc(50% - 0.5rem) calc(50% - 0.5rem);
+
+    @include -visibleBoxes(3);
+    @include -assign-grid-areas(3);
+    @include -box(1, 0rem, 0rem, $-half-area-dim, $-half-area-dim);
+    @include -box(2, $-half-area-dim, 0rem, $-half-area-dim, $-half-area-dim);
+    @include -box(3, 0rem, $-half-area-dim, $-whole-area-dim, $-half-area-dim);
+}
