@@ -1,10 +1,13 @@
-import { inject, Injectable, signal, WritableSignal } from '@angular/core';
+import { inject, Injectable, isDevMode, signal, WritableSignal } from '@angular/core';
 import { DeckState } from './deck-state';
 import { Side } from './deck/side';
 import { CardFace } from './deck/CardFace';
 import { Card } from './deck/Card';
 import AppMode from './AppMode';
 import CardLayout from './deck/cardlayout';
+import { BoxNumber } from './deck/Box';
+import { TextBox } from './deck/TextBox';
+import { ImageBox } from './deck/ImageBox';
 
 @Injectable({
   providedIn: 'root',
@@ -50,7 +53,7 @@ export class AppUIState {
   }
 
   setSideVisible(side: Side) {
-    this.#sideVisible.set(side)
+    return this.#sideVisible.set(side)
   }
 
   getCurrentVisibleCard(): Card | null {
@@ -58,11 +61,59 @@ export class AppUIState {
   }
 
   setAppMode(mode: AppMode) {
-    this.#appMode.set(mode)
+    return this.#appMode.set(mode)
   }
 
   setLayoutCurrentCard(layout: CardLayout) {
-    this.#deckState.setLayout(this.#cardVisible(), this.#sideVisible(), layout)
+    return this.#deckState.setLayout(this.#cardVisible(), this.#sideVisible(), layout)
+  }
+
+  createTextAreaCurrentCard(box: BoxNumber) {
+    return this.#deckState.createTextArea(this.#cardVisible(), this.#sideVisible(), box)
+  }
+
+  getTextCurrentCard(box: BoxNumber): string | null {
+    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[this.#sideVisible()]?.box[box]
+    if (TextBox.isTextBox(actualBox)) {
+      return actualBox.text
+    }
+
+    return null
+  }
+
+  setTextCurrentCard(box: BoxNumber, text: string): boolean {
+    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[this.#sideVisible()]?.box[box]
+    if (TextBox.isTextBox(actualBox)) {
+
+      this.#deckState.setText(this.#cardVisible(), this.#sideVisible(), box, text)
+      return true
+    }
+
+    return false
+  }
+
+  createImageAreaCurrentCard(box: BoxNumber) {
+    return this.#deckState.createImageArea(this.#cardVisible(), this.#sideVisible(), box)
+  }
+
+  getImageBase64CurrentCard(box: BoxNumber): string | null {
+    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[this.#sideVisible()]?.box[box]
+    if (ImageBox.isImageBox(actualBox)) {
+      return actualBox.base64ImageData
+    }
+
+    return null
+  }
+
+  setImageCurrentCard(box: BoxNumber, base64: string | null) {
+    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[this.#sideVisible()]?.box[box]
+    if (ImageBox.isImageBox(actualBox)) {
+
+      this.#deckState.setImage(this.#cardVisible(), this.#sideVisible(), box, base64)
+      return true
+    }
+
+    return false
   }
   
 }

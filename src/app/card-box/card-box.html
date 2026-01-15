@@ -1,1 +1,15 @@
-<p>Box {{boxNumber()}}</p>
+@switch (boxType()) {
+    @case (CardContentDataType.PLAIN_TEXT) {
+        <fc-text-box [boxNumber]="boxNumber()" />
+    }
+    @case (CardContentDataType.IMAGE) {
+        <fc-image-box [boxNumber]="boxNumber()" />
+    }
+    @case (CardContentDataType.LATEX) {
+        <p>LaTeX Box {{boxNumber()}}</p>
+    }
+    @default {
+        <fc-set-empty-area-contents-menu [side]="side()" [boxNumber]="boxNumber()" />
+    }
+}
+    

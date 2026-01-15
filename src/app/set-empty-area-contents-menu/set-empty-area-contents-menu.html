@@ -1,0 +1,19 @@
+<button matMiniFab [matMenuTriggerFor]="setEmptyAreaContentsMenu">
+    <mat-icon>edit</mat-icon>
+    <span></span>
+</button>
+
+<mat-menu #setEmptyAreaContentsMenu="matMenu">
+    <button mat-menu-item (click)="newTextBox()">
+        <mat-icon>article</mat-icon>
+        <span>Text</span>
+    </button>
+    <button mat-menu-item (click)="newImageBox()">
+        <mat-icon>image</mat-icon>
+        <span>Image</span>
+    </button>
+    <button mat-menu-item>
+        <mat-icon>superscript</mat-icon>
+        <span>LaTeX</span>
+    </button>
+</mat-menu>

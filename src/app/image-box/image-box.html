@@ -1,0 +1,17 @@
+@if (imageContents() !== null) {
+    <img [src]="imageContents()" />
+} 
+@else {
+    <button matButton="elevated" color="primary" (click)="fileInput.click()">
+        <mat-icon>file_open</mat-icon>
+        <span>Upload Image...</span>
+    </button>
+
+    <input
+    type="file"
+    accept="image/png,image/jpg,image/jpeg,image/gif,image/svg,image/webp,image/heic"
+    #fileInput
+    (change)="onFileSelected($event)"
+    style="display: none"
+    />
+}
