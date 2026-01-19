@@ -8,6 +8,7 @@ import CardLayout from './deck/cardlayout';
 import { BoxNumber } from './deck/Box';
 import { TextBox } from './deck/TextBox';
 import { ImageBox } from './deck/ImageBox';
+import { LaTeXTextBox } from './deck/LaTeXTextBox';
 
 @Injectable({
   providedIn: 'root',
@@ -110,6 +111,30 @@ export class AppUIState {
     if (ImageBox.isImageBox(actualBox)) {
 
       this.#deckState.setImage(this.#cardVisible(), this.#sideVisible(), box, base64)
+      return true
+    }
+
+    return false
+  }
+
+  createLaTeXTextAreaCurrentCard(box: BoxNumber) {
+    return this.#deckState.createLaTeXArea(this.#cardVisible(), this.#sideVisible(), box)
+  }
+
+  getLaTeXTextCurrentCard(box: BoxNumber): string | null {
+    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[this.#sideVisible()]?.box[box]
+    if (LaTeXTextBox.isLaTeXTextBox(actualBox)) {
+      return actualBox.latex_text
+    }
+
+    return null
+  }
+
+  setLaTeXTextCurrentCard(box: BoxNumber, text: string) {
+    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[this.#sideVisible()]?.box[box]
+    if (LaTeXTextBox.isLaTeXTextBox(actualBox)) {
+
+      this.#deckState.setLaTeXText(this.#cardVisible(), this.#sideVisible(), box, text)
       return true
     }
 

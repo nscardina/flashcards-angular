@@ -33,4 +33,8 @@ export class SetEmptyAreaContentsMenu {
     this.#appUIState.createImageAreaCurrentCard(this.boxNumber())
   }
 
+  newLaTeXTextBox() {
+    this.#appUIState.createLaTeXTextAreaCurrentCard(this.boxNumber())
+  }
+
 }

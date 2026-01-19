@@ -8,13 +8,15 @@ import { ChangeLayoutButton } from '../change-layout-button/change-layout-button
 import { SetEmptyAreaContentsMenu } from '../set-empty-area-contents-menu/set-empty-area-contents-menu';
 import { TextBox } from '../text-box/text-box';
 import { ImageBox } from '../image-box/image-box';
+import { LatexBox } from '../latex-box/latex-box';
 
 @Component({
   selector: 'fc-card-box',
   imports: [
     SetEmptyAreaContentsMenu,
     TextBox,
-    ImageBox
+    ImageBox,
+    LatexBox
   ],
   templateUrl: './card-box.html',
   styleUrl: './card-box.scss',

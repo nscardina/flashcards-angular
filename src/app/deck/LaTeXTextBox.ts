@@ -7,7 +7,7 @@ export type LaTeXTextBox = {
 }
 
 export namespace LaTeXTextBox {
-    export function isLaTeXTextBox(variable: unknown) {
+    export function isLaTeXTextBox(variable: unknown): variable is LaTeXTextBox {
         return (
             typeof (variable) === "object" &&
             variable !== null &&

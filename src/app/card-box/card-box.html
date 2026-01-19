@@ -6,7 +6,7 @@
         <fc-image-box [boxNumber]="boxNumber()" />
     }
     @case (CardContentDataType.LATEX) {
-        <p>LaTeX Box {{boxNumber()}}</p>
+        <fc-latex-box [boxNumber]="boxNumber()" />
     }
     @default {
         <fc-set-empty-area-contents-menu [side]="side()" [boxNumber]="boxNumber()" />

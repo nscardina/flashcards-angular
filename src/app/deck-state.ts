@@ -7,6 +7,8 @@ import { CardFace } from './deck/CardFace';
 import { TextBox } from './deck/TextBox';
 import { CardContentData } from './deck/CardContentData';
 import { ImageBox } from './deck/ImageBox';
+import { LatexBox } from './latex-box/latex-box';
+import { LaTeXTextBox } from './deck/LaTeXTextBox';
 
 const updateSide = (deck: Deck, cardIndex: number, side: Side, newValue: CardFace): Deck => ({
   ...deck,
@@ -249,6 +251,82 @@ export class DeckState {
 
     if (isDevMode()) {
       console.warn(`Unable to update image in box ${box} on ${side} of card ${cardIndex} to "${base64}"`)
+    }
+    return false
+  }
+
+  createLaTeXArea(cardIndex: number, side: Side, box: BoxNumber): boolean {
+    const deck = this.#deck()
+    if (deck !== null && cardIndex < deck.cards.length) {
+
+      const currentValue = deck.cards[cardIndex][side].box[box]
+      if (currentValue === null) {
+        
+        if (isDevMode()) {
+          console.info(`Creating empty LaTeX area in box ${box} on ${side} of card ${cardIndex}`)
+        }
+
+        const newLaTeXBox: LaTeXTextBox = {
+          type: CardContentData.Type.LATEX,
+          latex_text: ""
+        }
+        
+        this.#deck.set(updateSide(
+          deck, cardIndex, side, {
+            ...deck.cards[cardIndex][side],
+            box: {
+              ...deck.cards[cardIndex][side].box,
+              [box]: newLaTeXBox
+            }
+          }
+        ))
+
+        return true
+
+      }
+      
+    }
+
+    if (isDevMode()) {
+      console.warn(`Unable to create empty LaTeX area in box ${box} on ${side} of card ${cardIndex}`)
+    }
+    return false
+  }
+
+  setLaTeXText(cardIndex: number, side: Side, box: BoxNumber, text: string): boolean {
+    const deck = this.#deck()
+    if (deck !== null && cardIndex < deck.cards.length) {
+
+      const currentValue = deck.cards[cardIndex][side].box[box]
+      if (LaTeXTextBox.isLaTeXTextBox(currentValue)) {
+        
+        if (isDevMode()) {
+          console.info(`Updating LaTeX in box ${box} on ${side} of card ${cardIndex} to "${text}"`)
+        }
+
+        const newLaTeXBox: LaTeXTextBox = {
+          type: CardContentData.Type.LATEX,
+          latex_text: text
+        }
+        
+        this.#deck.set(updateSide(
+          deck, cardIndex, side, {
+            ...deck.cards[cardIndex][side],
+            box: {
+              ...deck.cards[cardIndex][side].box,
+              [box]: newLaTeXBox
+            }
+          }
+        ))
+
+        return true
+
+      }
+      
+    }
+
+    if (isDevMode()) {
+      console.warn(`Unable to update LaTeX in box ${box} on ${side} of card ${cardIndex} to "${text}"`)
     }
     return false
   }
