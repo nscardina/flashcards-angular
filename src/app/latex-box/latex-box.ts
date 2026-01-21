@@ -4,12 +4,13 @@ import { Side } from '../deck/side';
 import { AppUIState } from '../app-uistate';
 import * as katex from "katex"
 import { DomSanitizer } from '@angular/platform-browser';
+import AppMode from '../AppMode';
 
 @Component({
   selector: 'fc-latex-box',
   imports: [],
   templateUrl: './latex-box.html',
-  styleUrl: './latex-box.scss',
+  styleUrl: './latex-box.scss'
 })
 export class LatexBox {
 
@@ -40,6 +41,8 @@ export class LatexBox {
       )
     }, 0)
   }
+
+  outlined = computed(() => (this.#appState.appMode() === AppMode.EDITING_DECK) ? "outlined" : "")
 
   shouldSetChildTextBoxActive = model(false)
 

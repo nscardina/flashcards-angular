@@ -3,6 +3,7 @@ import { BoxNumber } from '../deck/Box';
 import { Side } from '../deck/side';
 import { AppUIState } from '../app-uistate';
 import { DeckState } from '../deck-state';
+import AppMode from '../AppMode';
 
 @Component({
   selector: 'fc-text-box',
@@ -24,6 +25,8 @@ export class TextBox {
   text = computed(() => this.#appState.getTextCurrentCard(this.boxNumber()))
 
   @ViewChild("textArea") textArea!: ElementRef<HTMLTextAreaElement>
+
+  outlined = computed(() => (this.#appState.appMode() === AppMode.EDITING_DECK) ? "outlined" : "")
 
   constructor() {
     afterRenderEffect(() => {

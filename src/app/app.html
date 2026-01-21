@@ -12,6 +12,31 @@
     Edit
   </button>
 
+  <span class="fc-spacer"></span>
+
+  @switch (appState.appMode()) {
+    @case (AppMode.EDITING_DECK) {
+      <button matFab extended [matMenuTriggerFor]="changeLayoutMenu">
+        <mat-icon>edit</mat-icon>
+        Editing Deck
+      </button>
+    }
+    @case (AppMode.MANAGING_FILES) {
+      <button matFab extended [matMenuTriggerFor]="changeLayoutMenu">
+        <mat-icon>edit</mat-icon>
+        Managing Files
+      </button>
+    }
+
+    @case (AppMode.REVIEWING_DECK) {
+      <button matFab extended [matMenuTriggerFor]="changeLayoutMenu">
+        <mat-icon>edit</mat-icon>
+        Reviewing Deck
+      </button>
+    }
+  }
+  
+
 </mat-toolbar>
 
 <mat-menu #fileMenu="matMenu">
@@ -25,6 +50,21 @@
 
   <fc-change-layout-button />
 
+</mat-menu>
+
+<mat-menu #changeLayoutMenu="matMenu">
+  <button mat-menu-item (click)="appState.setAppMode(AppMode.EDITING_DECK)">
+    <mat-icon>edit</mat-icon>
+    Editing Deck
+  </button>
+  <button mat-menu-item (click)="appState.setAppMode(AppMode.MANAGING_FILES)">
+    <mat-icon>edit</mat-icon>
+    Managing Files
+  </button>
+  <button mat-menu-item (click)="appState.setAppMode(AppMode.REVIEWING_DECK)">
+    <mat-icon>edit</mat-icon>
+    Reviewing Deck
+  </button>
 </mat-menu>
 
 <fc-deck-interaction-area />

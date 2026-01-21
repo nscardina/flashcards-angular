@@ -1,5 +1,5 @@
 @if(shouldRender()) {
-    <div class="renderedLaTeXContainer" (click)="focusTextArea()" [innerHTML]="html()"></div>
+    <div [classList]="`renderedLaTeXContainer ${outlined()}`" (click)="focusTextArea()" [innerHTML]="html()"></div>
 }
 @else {
     <textarea #latexContainer (blur)="updateText($event)" [textContent]="text()"></textarea>

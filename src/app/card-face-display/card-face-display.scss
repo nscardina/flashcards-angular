@@ -1,6 +1,8 @@
 @use "sass:list";
 @use "sass:map";
 
+@use '@angular/material' as mat;
+
 @keyframes fc-hide {
     0% { transform: rotateY(0deg); }
     50% { transform: rotateY(90deg); }
@@ -28,6 +30,9 @@
         animation-name: fc-hide;
         animation-timing-function: ease-in;
     }
+
+    border: 1px solid var(--mat-sys-on-surface);
+    border-radius: 1rem;
 }
 
 @mixin -box-properties() {
