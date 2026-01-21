@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, model } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -25,8 +25,11 @@ export class SetEmptyAreaContentsMenu {
 
   #appUIState = inject(AppUIState)
 
+  shouldSetChildTextBoxActive = model(false)
+
   newTextBox() {
     this.#appUIState.createTextAreaCurrentCard(this.boxNumber())
+    this.shouldSetChildTextBoxActive.set(true)
   }
 
   newImageBox() {
@@ -35,6 +38,7 @@ export class SetEmptyAreaContentsMenu {
 
   newLaTeXTextBox() {
     this.#appUIState.createLaTeXTextAreaCurrentCard(this.boxNumber())
+    this.shouldSetChildTextBoxActive.set(true)
   }
 
 }

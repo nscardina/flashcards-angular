@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, inject, input, signal, ViewChild } from '@angular/core';
+import { afterRenderEffect, Component, computed, ElementRef, inject, input, model, signal, ViewChild } from '@angular/core';
 import { BoxNumber } from '../deck/Box';
 import { Side } from '../deck/side';
 import { AppUIState } from '../app-uistate';
@@ -14,7 +14,16 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class LatexBox {
 
   constructor(private sanitizer: DomSanitizer) {
-
+    afterRenderEffect(() => {
+      if (this.shouldSetChildTextBoxActive()) {
+        if (this.shouldRender()) {
+          this.shouldRender.set(false)
+        } else {
+          this.latexContainer.nativeElement.focus()
+          this.shouldSetChildTextBoxActive.set(false)
+        }
+      }
+    })
   }
 
   @ViewChild("latexContainer") latexContainer!: ElementRef<HTMLTextAreaElement>
@@ -31,6 +40,8 @@ export class LatexBox {
       )
     }, 0)
   }
+
+  shouldSetChildTextBoxActive = model(false)
 
   side = input(Side.FRONT)
 

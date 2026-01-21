@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, model, signal } from '@angular/core';
 import { Side } from '../deck/side';
 import { BoxNumber } from '../deck/Box';
 import { DeckState } from '../deck-state';
@@ -31,6 +31,8 @@ export class CardBox {
   side = input(Side.FRONT)
 
   boxNumber = input<BoxNumber>("1")
+
+  shouldSetChildTextBoxActive = signal(false)
 
   appUIState = inject(AppUIState)
 
