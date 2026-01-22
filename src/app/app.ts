@@ -12,6 +12,8 @@ import { DeckInteractionArea } from './deck-interaction-area/deck-interaction-ar
 import { ChangeLayoutButton } from './change-layout-button/change-layout-button';
 import { AppUIState } from './app-uistate';
 import AppMode from './AppMode';
+import { DeckTitleTextField } from './deck-title-text-field/deck-title-text-field';
+import { Side } from './deck/side';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +26,8 @@ import AppMode from './AppMode';
     FileUpload, 
     NewDeckButton,
     DeckInteractionArea,
-    ChangeLayoutButton
+    ChangeLayoutButton,
+    DeckTitleTextField
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
@@ -34,6 +37,12 @@ export class App {
   appState = inject(AppUIState)
 
   AppMode = AppMode
+  Side = Side
 
   protected readonly title = signal('flashcards-angular');
+
+  flipVisibleSide() {
+    console.log("flip")
+    this.appState.setSideVisible((this.appState.sideVisible() === Side.FRONT) ? Side.BACK : Side.FRONT)
+  }
 }

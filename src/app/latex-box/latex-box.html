@@ -8,6 +8,7 @@
 }
 @else {
     <textarea #latexContainer 
+        [readOnly]="readonly()"
         (blur)="updateText($event)" 
         [textContent]="text()"
         [cdkContextMenuTriggerFor]="rightClickMenu"

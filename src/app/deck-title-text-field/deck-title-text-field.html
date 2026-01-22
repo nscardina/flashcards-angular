@@ -1,0 +1,5 @@
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+    @if (name() !== undefined) {
+        <input matInput [value]="name()" (change)="updateName($event.target.value)">
+    }
+</mat-form-field>

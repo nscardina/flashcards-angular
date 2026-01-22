@@ -1,4 +1,5 @@
-<textarea #textArea 
+<textarea #textArea
+    [readOnly]="readonly()"
     [classList]="outlined()" 
     (cdkMenuItemTriggered)="updateText($event)"
     [cdkContextMenuTriggerFor]="rightClickMenu"

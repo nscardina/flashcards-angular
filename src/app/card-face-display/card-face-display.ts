@@ -20,7 +20,7 @@ export class CardFaceDisplay {
 
   side = input(Side.FRONT)
 
-  isRotated = computed(() => (this.side() === Side.BACK))
+  isRotated = computed(() => (this.side() !== this.#appState.sideVisible()))
 
   layout = computed(() => (this.#appState.getCurrentVisibleCard()?.[this.side()].layout ?? ""))
 

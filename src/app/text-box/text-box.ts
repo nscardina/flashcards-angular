@@ -23,8 +23,9 @@ export class TextBox {
   side = input(Side.FRONT)
   boxNumber = input<BoxNumber>("1")
 
-  text = computed(() => this.#appState.getTextCurrentCard(this.boxNumber()))
+  text = computed(() => this.#appState.getTextCurrentCard(this.side(), this.boxNumber()))
   outlined = computed(() => (this.#appState.appMode() === AppMode.EDITING_DECK) ? "outlined" : "")
+  readonly = computed(() => this.#appState.appMode() !== AppMode.EDITING_DECK)
 
   constructor() {
 
@@ -37,11 +38,11 @@ export class TextBox {
   }
 
   updateText(event: Event) {
-    this.#appState.setTextCurrentCard(this.boxNumber(), (event.target as HTMLTextAreaElement).value)
+    this.#appState.setTextCurrentCard(this.side(), this.boxNumber(), (event.target as HTMLTextAreaElement).value)
   }
 
   deleteTextBox() {
-    this.#appState.deleteAreaCurrentCard(this.boxNumber())
+    this.#appState.deleteAreaCurrentCard(this.side(), this.boxNumber())
   }
 
 }

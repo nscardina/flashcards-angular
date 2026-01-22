@@ -2,40 +2,54 @@
 
 <mat-toolbar ngSkipHydration>
 
-  <img src="logo.svg" alt="Flashcards Logo" id="fc-toolbar-logo" />
+  <div class="toolbar-left">
+    <img src="logo.svg" alt="Flashcards Logo" id="fc-toolbar-logo" />
 
-  <button mat-button [matMenuTriggerFor]="fileMenu">
-    File
-  </button>
+    <button mat-button [matMenuTriggerFor]="fileMenu">
+      File
+    </button>
 
-  <button mat-button [matMenuTriggerFor]="editMenu">
-    Edit
-  </button>
-
-  <span class="fc-spacer"></span>
-
-  @switch (appState.appMode()) {
-    @case (AppMode.EDITING_DECK) {
-      <button matFab extended [matMenuTriggerFor]="changeLayoutMenu">
-        <mat-icon>edit</mat-icon>
-        Editing Deck
+    @if (appState.appMode() === AppMode.EDITING_DECK) {
+      <button mat-button [matMenuTriggerFor]="editMenu">
+        Edit
       </button>
     }
-    @case (AppMode.MANAGING_FILES) {
-      <button matFab extended [matMenuTriggerFor]="changeLayoutMenu">
-        <mat-icon class="material-symbols-outlined">cards_stack</mat-icon>
-        Managing Files
-      </button>
-    }
+  </div>
 
-    @case (AppMode.REVIEWING_DECK) {
-      <button matFab extended [matMenuTriggerFor]="changeLayoutMenu">
-        <mat-icon class="material-symbols-outlined">transition_slide</mat-icon>
-        Reviewing Deck
-      </button>
+  <div class="toolbar-center">
+
+    <fc-deck-title-text-field />
+
+  </div>
+
+  <div class="toolbar-right">
+    <button matFab (click)="flipVisibleSide()" style="margin-right: 1rem;">
+      <mat-icon>flip</mat-icon>
+    </button>
+
+    @switch (appState.appMode()) {
+      @case (AppMode.EDITING_DECK) {
+        <button matFab extended [matMenuTriggerFor]="changeLayoutMenu">
+          <mat-icon>edit</mat-icon>
+          Editing Deck
+        </button>
+      }
+      
+      @case (AppMode.MANAGING_FILES) {
+        <button matFab extended [matMenuTriggerFor]="changeLayoutMenu">
+          <mat-icon class="material-symbols-outlined">cards_stack</mat-icon>
+          Managing Files
+        </button>
+      }
+
+      @case (AppMode.REVIEWING_DECK) {
+        <button matFab extended [matMenuTriggerFor]="changeLayoutMenu">
+          <mat-icon class="material-symbols-outlined">transition_slide</mat-icon>
+          Reviewing Deck
+        </button>
+      }
     }
-  }
-  
+  </div>
 
 </mat-toolbar>
 

@@ -65,16 +65,16 @@ export class AppUIState {
     return this.#appMode.set(mode)
   }
 
-  setLayoutCurrentCard(layout: CardLayout) {
-    return this.#deckState.setLayout(this.#cardVisible(), this.#sideVisible(), layout)
+  setLayoutCurrentCard(side: Side, layout: CardLayout) {
+    return this.#deckState.setLayout(this.#cardVisible(), side, layout)
   }
 
-  createTextAreaCurrentCard(box: BoxNumber) {
-    return this.#deckState.createTextArea(this.#cardVisible(), this.#sideVisible(), box)
+  createTextAreaCurrentCard(side: Side, box: BoxNumber) {
+    return this.#deckState.createTextArea(this.#cardVisible(), side, box)
   }
 
-  getTextCurrentCard(box: BoxNumber): string | null {
-    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[this.#sideVisible()]?.box[box]
+  getTextCurrentCard(side: Side, box: BoxNumber): string | null {
+    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[side]?.box[box]
     if (TextBox.isTextBox(actualBox)) {
       return actualBox.text
     }
@@ -82,23 +82,23 @@ export class AppUIState {
     return null
   }
 
-  setTextCurrentCard(box: BoxNumber, text: string): boolean {
-    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[this.#sideVisible()]?.box[box]
+  setTextCurrentCard(side: Side, box: BoxNumber, text: string): boolean {
+    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[side]?.box[box]
     if (TextBox.isTextBox(actualBox)) {
 
-      this.#deckState.setText(this.#cardVisible(), this.#sideVisible(), box, text)
+      this.#deckState.setText(this.#cardVisible(), side, box, text)
       return true
     }
 
     return false
   }
 
-  createImageAreaCurrentCard(box: BoxNumber) {
-    return this.#deckState.createImageArea(this.#cardVisible(), this.#sideVisible(), box)
+  createImageAreaCurrentCard(side: Side, box: BoxNumber) {
+    return this.#deckState.createImageArea(this.#cardVisible(), side, box)
   }
 
-  getImageBase64CurrentCard(box: BoxNumber): string | null {
-    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[this.#sideVisible()]?.box[box]
+  getImageBase64CurrentCard(side: Side, box: BoxNumber): string | null {
+    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[side]?.box[box]
     if (ImageBox.isImageBox(actualBox)) {
       return actualBox.base64ImageData
     }
@@ -106,23 +106,23 @@ export class AppUIState {
     return null
   }
 
-  setImageCurrentCard(box: BoxNumber, base64: string | null) {
-    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[this.#sideVisible()]?.box[box]
+  setImageCurrentCard(side: Side, box: BoxNumber, base64: string | null) {
+    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[side]?.box[box]
     if (ImageBox.isImageBox(actualBox)) {
 
-      this.#deckState.setImage(this.#cardVisible(), this.#sideVisible(), box, base64)
+      this.#deckState.setImage(this.#cardVisible(), side, box, base64)
       return true
     }
 
     return false
   }
 
-  createLaTeXTextAreaCurrentCard(box: BoxNumber) {
-    return this.#deckState.createLaTeXArea(this.#cardVisible(), this.#sideVisible(), box)
+  createLaTeXTextAreaCurrentCard(side: Side, box: BoxNumber) {
+    return this.#deckState.createLaTeXArea(this.#cardVisible(), side, box)
   }
 
-  getLaTeXTextCurrentCard(box: BoxNumber): string | null {
-    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[this.#sideVisible()]?.box[box]
+  getLaTeXTextCurrentCard(side: Side, box: BoxNumber): string | null {
+    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[side]?.box[box]
     if (LaTeXTextBox.isLaTeXTextBox(actualBox)) {
       return actualBox.latex_text
     }
@@ -130,19 +130,19 @@ export class AppUIState {
     return null
   }
 
-  setLaTeXTextCurrentCard(box: BoxNumber, text: string) {
-    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[this.#sideVisible()]?.box[box]
+  setLaTeXTextCurrentCard(side: Side, box: BoxNumber, text: string) {
+    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[side]?.box[box]
     if (LaTeXTextBox.isLaTeXTextBox(actualBox)) {
 
-      this.#deckState.setLaTeXText(this.#cardVisible(), this.#sideVisible(), box, text)
+      this.#deckState.setLaTeXText(this.#cardVisible(), side, box, text)
       return true
     }
 
     return false
   }
 
-  deleteAreaCurrentCard(box: BoxNumber) {
-    this.#deckState.deleteArea(this.#cardVisible(), this.#sideVisible(), box)
+  deleteAreaCurrentCard(side: Side, box: BoxNumber) {
+    this.#deckState.deleteArea(this.#cardVisible(), side, box)
   }
   
 }

@@ -11,3 +11,19 @@
 .fc-spacer {
     flex: 1 1 auto;
 }
+
+.toolbar-left, .toolbar-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.toolbar-right {
+    justify-content: flex-end;
+}
+
+.toolbar-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -29,18 +29,18 @@ export class SetEmptyAreaContentsMenu {
   shouldSetChildTextBoxActive = model(false)
 
   newTextBox() {
-    this.#appUIState.createTextAreaCurrentCard(this.boxNumber())
+    this.#appUIState.createTextAreaCurrentCard(this.side(), this.boxNumber())
     this.#appUIState.setAppMode(AppMode.EDITING_DECK)
     this.shouldSetChildTextBoxActive.set(true)
   }
 
   newImageBox() {
-    this.#appUIState.createImageAreaCurrentCard(this.boxNumber())
+    this.#appUIState.createImageAreaCurrentCard(this.side(), this.boxNumber())
     this.#appUIState.setAppMode(AppMode.EDITING_DECK)
   }
 
   newLaTeXTextBox() {
-    this.#appUIState.createLaTeXTextAreaCurrentCard(this.boxNumber())
+    this.#appUIState.createLaTeXTextAreaCurrentCard(this.side(), this.boxNumber())
     this.shouldSetChildTextBoxActive.set(true)
     this.#appUIState.setAppMode(AppMode.EDITING_DECK)
   }

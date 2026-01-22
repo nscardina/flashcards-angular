@@ -1,0 +1,14 @@
+:host {
+    min-width: 10rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+input {
+    text-align: center;
+    text-overflow: ellipsis;
+    // background-color: transparent;
+    // border: 1px solid black;
+    // padding: 1rem;
+}

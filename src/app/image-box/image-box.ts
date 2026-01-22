@@ -29,12 +29,10 @@ export class ImageBox {
   side = input(Side.FRONT)
   boxNumber = input<BoxNumber>("1")
 
-  imageContents = computed(() => this.#appState.getImageBase64CurrentCard(this.boxNumber()))
+  imageContents = computed(() => this.#appState.getImageBase64CurrentCard(this.side(), this.boxNumber()))
 
   constructor(private dialog: MatDialog) { 
   }
-
-  onRightClick(event: MouseEvent, item: any) {}
 
   async onFileSelected(event: Event) {
     
@@ -56,14 +54,14 @@ export class ImageBox {
           toFormat: "png"
         }
       })
-      this.#appState.setImageCurrentCard(this.boxNumber(), await heicToPngBase64(imageFile))
+      this.#appState.setImageCurrentCard(this.side(), this.boxNumber(), await heicToPngBase64(imageFile))
       dialogRef.close()
     } else {
       const reader = new FileReader()
       reader.onload = (e) => {
         const image = e.target!.result as string
         input.value = ""
-        this.#appState.setImageCurrentCard(this.boxNumber(), image)
+        this.#appState.setImageCurrentCard(this.side(), this.boxNumber(), image)
       }
       reader.readAsArrayBuffer(imageFile)
     }
@@ -71,7 +69,7 @@ export class ImageBox {
   }
 
   deleteImageBox() {
-    this.#appState.deleteAreaCurrentCard(this.boxNumber())
+    this.#appState.deleteAreaCurrentCard(this.side(), this.boxNumber())
   }
 
 }

@@ -356,4 +356,17 @@ export class DeckState {
     }
     return false
   }
+
+  setDeckName(name: string): boolean {
+    const deck = this.#deck()
+    if (deck !== null) {
+      this.#deck.set({
+        name: name,
+        cards: deck.cards
+      })
+      return true
+    }
+
+    return false
+  }
 }

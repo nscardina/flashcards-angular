@@ -30,13 +30,14 @@ export class LatexBox {
   side = input(Side.FRONT)
   boxNumber = input<BoxNumber>("1")
 
-  text = computed(() => this.#appState.getLaTeXTextCurrentCard(this.boxNumber()) ?? "")
-  html = computed(() => this.sanitizer.bypassSecurityTrustHtml(katex.renderToString(this.#appState.getLaTeXTextCurrentCard(this.boxNumber()) ?? "", {
+  text = computed(() => this.#appState.getLaTeXTextCurrentCard(this.side(), this.boxNumber()) ?? "")
+  html = computed(() => this.sanitizer.bypassSecurityTrustHtml(katex.renderToString(this.#appState.getLaTeXTextCurrentCard(this.side(), this.boxNumber()) ?? "", {
     output: "mathml",
     displayMode: true,
     
   })))
   outlined = computed(() => (this.#appState.appMode() === AppMode.EDITING_DECK) ? "outlined" : "")
+  readonly = computed(() => this.#appState.appMode() !== AppMode.EDITING_DECK)
 
   constructor(private sanitizer: DomSanitizer) {
     afterRenderEffect(() => {
@@ -66,14 +67,14 @@ export class LatexBox {
     console.log("update text")
     if (!this.shouldRender()) {
       this.shouldRender.set(true)
-      this.#appState.setLaTeXTextCurrentCard(this.boxNumber(), (event.target as HTMLTextAreaElement).value)
+      this.#appState.setLaTeXTextCurrentCard(this.side(), this.boxNumber(), (event.target as HTMLTextAreaElement).value)
     }
   }
 
   deleteLaTeXBox() {
     console.log("delete")
     this.shouldRender.set(true)
-    this.#appState.deleteAreaCurrentCard(this.boxNumber())
+    this.#appState.deleteAreaCurrentCard(this.side(), this.boxNumber())
   }
 
 }
