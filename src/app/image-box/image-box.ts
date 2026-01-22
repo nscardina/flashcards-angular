@@ -1,35 +1,40 @@
-import { Component, computed, inject, input, PLATFORM_ID } from '@angular/core';
+import { afterNextRender, Component, computed, inject, input, PLATFORM_ID, ViewChild } from '@angular/core';
 import { Side } from '../deck/side';
 import { BoxNumber } from '../deck/Box';
 import { AppUIState } from '../app-uistate';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from "@angular/material/button";
+import { CdkMenuModule } from "@angular/cdk/menu";
 import { encode } from "base64-arraybuffer"
 import { MatDialog } from '@angular/material/dialog';
 import { ConvertingImageFormatDialog } from '../converting-image-format-dialog/converting-image-format-dialog';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'fc-image-box',
   imports: [
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule,
+    CdkMenuModule,
 ],
   templateUrl: './image-box.html',
   styleUrl: './image-box.scss',
 })
 export class ImageBox {
 
-  constructor(private dialog: MatDialog) {}
-
   platformId = inject(PLATFORM_ID)
-
-  side = input(Side.FRONT)
-
-  boxNumber = input<BoxNumber>("1")
-
   #appState = inject(AppUIState)
 
+  side = input(Side.FRONT)
+  boxNumber = input<BoxNumber>("1")
+
   imageContents = computed(() => this.#appState.getImageBase64CurrentCard(this.boxNumber()))
+
+  constructor(private dialog: MatDialog) { 
+  }
+
+  onRightClick(event: MouseEvent, item: any) {}
 
   async onFileSelected(event: Event) {
     
@@ -63,6 +68,10 @@ export class ImageBox {
       reader.readAsArrayBuffer(imageFile)
     }
     
+  }
+
+  deleteImageBox() {
+    this.#appState.deleteAreaCurrentCard(this.boxNumber())
   }
 
 }

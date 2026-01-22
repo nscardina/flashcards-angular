@@ -140,5 +140,9 @@ export class AppUIState {
 
     return false
   }
+
+  deleteAreaCurrentCard(box: BoxNumber) {
+    this.#deckState.deleteArea(this.#cardVisible(), this.#sideVisible(), box)
+  }
   
 }

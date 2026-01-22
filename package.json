@@ -38,6 +38,7 @@
     "express": "^5.1.0",
     "heic-convert": "^2.1.0",
     "katex": "^0.16.27",
+    "material-symbols": "^0.40.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

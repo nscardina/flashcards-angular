@@ -1,6 +1,28 @@
 @if(shouldRender()) {
-    <div [classList]="`renderedLaTeXContainer ${outlined()}`" (click)="focusTextArea()" [innerHTML]="html()"></div>
+    <div 
+        [classList]="`renderedLaTeXContainer ${outlined()}`" 
+        (click)="focusTextArea()" 
+        [innerHTML]="html()"
+        [cdkContextMenuTriggerFor]="rightClickMenu"
+    ></div>
 }
 @else {
-    <textarea #latexContainer (blur)="updateText($event)" [textContent]="text()"></textarea>
+    <textarea #latexContainer 
+        (blur)="updateText($event)" 
+        [textContent]="text()"
+        [cdkContextMenuTriggerFor]="rightClickMenu"
+    ></textarea>
 }
+
+<ng-template #rightClickMenu>
+    <div class="mat-menu-panel mat-mdc-menu-panel mat-elevation-z4" cdkMenu>
+        <div class="mat-mdc-menu-content mat-typography">
+            <button mat-menu-item (mousedown)="deleteLaTeXBox()">
+                <mat-icon>delete</mat-icon>
+                <span class="mat-mdc-menu-item-text">Delete LaTeX Box</span>
+            </button>
+        </div>
+        
+    </div>
+       
+</ng-template>

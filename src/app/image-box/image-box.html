@@ -1,8 +1,13 @@
 @if (imageContents() !== null) {
-    <img [src]="imageContents()" />
+    <img [src]="imageContents()" [cdkContextMenuTriggerFor]="rightClickMenu" />
 } 
 @else {
-    <button matButton="elevated" color="primary" (click)="fileInput.click()">
+    <button 
+        matButton="elevated" 
+        color="primary" 
+        (cdkMenuItemTriggered)="fileInput.click()"
+        [cdkContextMenuTriggerFor]="rightClickMenu"
+        >
         <mat-icon>file_open</mat-icon>
         <span>Upload Image...</span>
     </button>
@@ -15,3 +20,16 @@
     style="display: none"
     />
 }
+
+<ng-template #rightClickMenu>
+    <div class="mat-menu-panel mat-mdc-menu-panel mat-elevation-z4" cdkMenu>
+        <div class="mat-mdc-menu-content mat-typography">
+            <button mat-menu-item (click)="deleteImageBox()">
+                <mat-icon>delete</mat-icon>
+                <span class="mat-mdc-menu-item-text">Delete Image</span>
+            </button>
+        </div>
+        
+    </div>
+       
+</ng-template>

@@ -330,4 +330,30 @@ export class DeckState {
     }
     return false
   }
+
+  deleteArea(cardIndex: number, side: Side, box: BoxNumber): boolean {
+    const deck = this.#deck()
+    if (deck !== null && cardIndex < deck.cards.length) {
+      if (isDevMode()) {
+        console.log(`Removing box ${box} on ${side} of card ${cardIndex}`)
+      }
+
+      this.#deck.set(updateSide(
+          deck, cardIndex, side, {
+            ...deck.cards[cardIndex][side],
+            box: {
+              ...deck.cards[cardIndex][side].box,
+              [box]: null
+            }
+          }
+        ))
+
+        return true
+    }
+
+    if (isDevMode()) {
+      console.warn(`Unable to delete box ${box} on ${side} of card ${cardIndex}`)
+    }
+    return false
+  }
 }

@@ -6,6 +6,7 @@ import { Side } from '../deck/side';
 import { BoxNumber } from '../deck/Box';
 import { DeckState } from '../deck-state';
 import { AppUIState } from '../app-uistate';
+import AppMode from '../AppMode';
 
 @Component({
   selector: 'fc-set-empty-area-contents-menu',
@@ -29,16 +30,19 @@ export class SetEmptyAreaContentsMenu {
 
   newTextBox() {
     this.#appUIState.createTextAreaCurrentCard(this.boxNumber())
+    this.#appUIState.setAppMode(AppMode.EDITING_DECK)
     this.shouldSetChildTextBoxActive.set(true)
   }
 
   newImageBox() {
     this.#appUIState.createImageAreaCurrentCard(this.boxNumber())
+    this.#appUIState.setAppMode(AppMode.EDITING_DECK)
   }
 
   newLaTeXTextBox() {
     this.#appUIState.createLaTeXTextAreaCurrentCard(this.boxNumber())
     this.shouldSetChildTextBoxActive.set(true)
+    this.#appUIState.setAppMode(AppMode.EDITING_DECK)
   }
 
 }

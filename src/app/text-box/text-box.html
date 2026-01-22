@@ -1,1 +1,18 @@
-<textarea #textArea [classList]="outlined()" (input)="updateText($event)">{{text()}}</textarea>
+<textarea #textArea 
+    [classList]="outlined()" 
+    (cdkMenuItemTriggered)="updateText($event)"
+    [cdkContextMenuTriggerFor]="rightClickMenu"
+>{{text()}}</textarea>
+
+<ng-template #rightClickMenu>
+    <div class="mat-menu-panel mat-mdc-menu-panel mat-elevation-z4" cdkMenu>
+        <div class="mat-mdc-menu-content mat-typography">
+            <button mat-menu-item (click)="deleteTextBox()">
+                <mat-icon>delete</mat-icon>
+                <span class="mat-mdc-menu-item-text">Delete Text Box</span>
+            </button>
+        </div>
+        
+    </div>
+       
+</ng-template>

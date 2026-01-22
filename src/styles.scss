@@ -5,6 +5,7 @@
 // Learn more about theming and how to use it for your application's
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+@import "material-symbols";
 
 html {
   height: 100%;
@@ -36,3 +37,18 @@ body {
   height: 100%;
 }
 /* You can add global styles to this file, and also import other style files */
+
+
+.mat-menu-panel[cdkMenu] {
+  /* Use the Material 3 surface container color token */
+  background-color: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface);
+  
+  /* Standard menu styling */
+  min-width: 112px;
+  max-width: 280px;
+  border-radius: var(--mat-sys-corner-extra-small, 4px);
+  padding: 8px 0;
+  outline: 0;
+  overflow: auto;
+}

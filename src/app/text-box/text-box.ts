@@ -1,34 +1,33 @@
-import { afterRenderEffect, Component, computed, effect, ElementRef, inject, input, model, ViewChild } from '@angular/core';
+import { afterRenderEffect, Component, computed, ElementRef, inject, input, model, ViewChild } from '@angular/core';
 import { BoxNumber } from '../deck/Box';
 import { Side } from '../deck/side';
 import { AppUIState } from '../app-uistate';
-import { DeckState } from '../deck-state';
 import AppMode from '../AppMode';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { CdkMenuModule } from '@angular/cdk/menu';
 
 @Component({
   selector: 'fc-text-box',
-  imports: [],
+  imports: [MatMenuModule, MatIconModule, CdkMenuModule],
   templateUrl: './text-box.html',
   styleUrl: './text-box.scss',
 })
 export class TextBox {
 
-  side = input(Side.FRONT)
-
-  boxNumber = input<BoxNumber>("1")
-
+  @ViewChild("textArea") textArea!: ElementRef<HTMLTextAreaElement>
   shouldSetChildTextBoxActive = model(false)
 
   #appState = inject(AppUIState)
-  #deckState = inject(DeckState)
+
+  side = input(Side.FRONT)
+  boxNumber = input<BoxNumber>("1")
 
   text = computed(() => this.#appState.getTextCurrentCard(this.boxNumber()))
-
-  @ViewChild("textArea") textArea!: ElementRef<HTMLTextAreaElement>
-
   outlined = computed(() => (this.#appState.appMode() === AppMode.EDITING_DECK) ? "outlined" : "")
 
   constructor() {
+
     afterRenderEffect(() => {
       if (this.shouldSetChildTextBoxActive()) {
         this.textArea.nativeElement.focus()
@@ -39,6 +38,10 @@ export class TextBox {
 
   updateText(event: Event) {
     this.#appState.setTextCurrentCard(this.boxNumber(), (event.target as HTMLTextAreaElement).value)
+  }
+
+  deleteTextBox() {
+    this.#appState.deleteAreaCurrentCard(this.boxNumber())
   }
 
 }

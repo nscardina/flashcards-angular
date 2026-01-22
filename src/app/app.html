@@ -23,14 +23,14 @@
     }
     @case (AppMode.MANAGING_FILES) {
       <button matFab extended [matMenuTriggerFor]="changeLayoutMenu">
-        <mat-icon>edit</mat-icon>
+        <mat-icon class="material-symbols-outlined">cards_stack</mat-icon>
         Managing Files
       </button>
     }
 
     @case (AppMode.REVIEWING_DECK) {
       <button matFab extended [matMenuTriggerFor]="changeLayoutMenu">
-        <mat-icon>edit</mat-icon>
+        <mat-icon class="material-symbols-outlined">transition_slide</mat-icon>
         Reviewing Deck
       </button>
     }
@@ -58,11 +58,11 @@
     Editing Deck
   </button>
   <button mat-menu-item (click)="appState.setAppMode(AppMode.MANAGING_FILES)">
-    <mat-icon>edit</mat-icon>
+    <mat-icon class="material-symbols-outlined">cards_stack</mat-icon>
     Managing Files
   </button>
   <button mat-menu-item (click)="appState.setAppMode(AppMode.REVIEWING_DECK)">
-    <mat-icon>edit</mat-icon>
+    <mat-icon class="material-symbols-outlined">transition_slide</mat-icon>
     Reviewing Deck
   </button>
 </mat-menu>
