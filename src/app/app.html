@@ -9,11 +9,10 @@
       File
     </button>
 
-    @if (appState.appMode() === AppMode.EDITING_DECK) {
-      <button mat-button [matMenuTriggerFor]="editMenu">
-        Edit
-      </button>
-    }
+
+    <button mat-button [matMenuTriggerFor]="editMenu">
+      Edit
+    </button>
   </div>
 
   <div class="toolbar-center">
@@ -23,6 +22,9 @@
   </div>
 
   <div class="toolbar-right">
+
+    <fc-card-index-picker />
+
     <button matFab (click)="flipVisibleSide()" style="margin-right: 1rem;">
       <mat-icon>flip</mat-icon>
     </button>

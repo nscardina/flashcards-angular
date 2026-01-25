@@ -25,6 +25,7 @@ export class ChangeLayoutButton {
     .map(layout => ({layout: layout, text: getText(layout)}))
 
   setLayout(layout: CardLayout) {
+    this.#appUIState.setAppMode(AppMode.EDITING_DECK)
     this.#appUIState.setLayoutCurrentCard(this.#appUIState.sideVisible(), layout)
   }
 

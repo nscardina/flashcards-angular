@@ -1,0 +1,9 @@
+<mat-form-field style="padding-left: 1rem; padding-right: 1rem;" subscriptSizing="dynamic">
+    <mat-label>{{placeholderText()}}</mat-label>
+    <input #indexInput matInput type="number" 
+        min="1" [max]="deckState.deck()?.cards?.length ?? 1"
+        [placeholder]="placeholderText()" 
+        (focus)="onInputFocus()"
+        (blur)="onInputChange($event)"
+    >
+</mat-form-field>

@@ -5,7 +5,7 @@
     <button 
         matButton="elevated" 
         color="primary" 
-        (cdkMenuItemTriggered)="fileInput.click()"
+        (click)="fileInput.click()"
         [cdkContextMenuTriggerFor]="rightClickMenu"
         >
         <mat-icon>file_open</mat-icon>
