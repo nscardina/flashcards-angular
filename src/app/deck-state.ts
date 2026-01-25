@@ -9,6 +9,7 @@ import { CardContentData } from './deck/CardContentData';
 import { ImageBox } from './deck/ImageBox';
 import { LatexBox } from './latex-box/latex-box';
 import { LaTeXTextBox } from './deck/LaTeXTextBox';
+import { Card } from './deck/Card';
 
 const updateSide = (deck: Deck, cardIndex: number, side: Side, newValue: CardFace): Deck => ({
   ...deck,
@@ -369,4 +370,23 @@ export class DeckState {
 
     return false
   }
+
+  addCard(indexToAddAfter: number, card: Card): boolean {
+    const deck = this.#deck()
+    if (deck !== null) {
+      this.#deck.set({
+        name: deck.name,
+        cards: [
+          ...deck.cards.slice(0, indexToAddAfter + 1),
+          card,
+          ...deck.cards.slice(indexToAddAfter + 1)
+        ]
+      })
+      return true
+    }
+
+    return false
+  }
+
+  
 }

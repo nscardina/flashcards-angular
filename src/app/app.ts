@@ -15,6 +15,7 @@ import AppMode from './AppMode';
 import { DeckTitleTextField } from './deck-title-text-field/deck-title-text-field';
 import { Side } from './deck/side';
 import { CardIndexPicker } from './card-index-picker/card-index-picker';
+import { AddCardAfterButton } from './add-card-after-button/add-card-after-button';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,8 @@ import { CardIndexPicker } from './card-index-picker/card-index-picker';
     DeckInteractionArea,
     ChangeLayoutButton,
     DeckTitleTextField,
-    CardIndexPicker
+    CardIndexPicker,
+    AddCardAfterButton
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'

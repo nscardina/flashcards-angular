@@ -144,5 +144,9 @@ export class AppUIState {
   deleteAreaCurrentCard(side: Side, box: BoxNumber) {
     this.#deckState.deleteArea(this.#cardVisible(), side, box)
   }
+
+  addBlankCardAfter() {
+    this.#deckState.addCard(this.#cardVisible(), Card.makeDefault())
+  }
   
 }
