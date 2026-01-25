@@ -17,6 +17,8 @@ import { Side } from './deck/side';
 import { CardIndexPicker } from './card-index-picker/card-index-picker';
 import { AddCardAfterButton } from './add-card-after-button/add-card-after-button';
 import { DeleteCurrentCardButton } from "./delete-current-card-button/delete-current-card-button";
+import { MoveCardBackwardButton } from "./move-card-backward-button/move-card-backward-button";
+import { MoveCardForwardButton } from "./move-card-forward-button/move-card-forward-button";
 
 @Component({
   selector: 'app-root',
@@ -33,7 +35,9 @@ import { DeleteCurrentCardButton } from "./delete-current-card-button/delete-cur
     DeckTitleTextField,
     CardIndexPicker,
     AddCardAfterButton,
-    DeleteCurrentCardButton
+    DeleteCurrentCardButton,
+    MoveCardBackwardButton,
+    MoveCardForwardButton
 ],
   templateUrl: './app.html',
   styleUrl: './app.scss'

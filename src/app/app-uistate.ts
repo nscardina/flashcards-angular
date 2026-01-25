@@ -152,5 +152,13 @@ export class AppUIState {
   deleteCurrentCard(): boolean {
     return this.#deckState.deleteCard(this.#cardVisible())
   }
+
+  moveCurrentCardBackward() {
+    return this.#deckState.moveCardBackwardsInDeck(this.#cardVisible())
+  }
+
+  moveCurrentCardForward() {
+    return this.#deckState.moveCardForwardsInDeck(this.#cardVisible())
+  }
   
 }

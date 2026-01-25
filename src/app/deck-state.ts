@@ -405,5 +405,77 @@ export class DeckState {
     return false
   }
 
+  moveCardBackwardsInDeck(index: number): boolean {
+    const deck = this.#deck()
+    if (deck !== null) {
+
+      if (deck.cards.length <= 1) {
+        return true
+      }
+
+      if (index === 0) {
+        const cards = [
+          ...deck.cards.slice(1),
+          deck.cards[0]
+        ]
+        this.#deck.set({
+          name: deck.name,
+          cards: cards
+        })
+        return true
+      } 
+
+      this.#deck.set({
+        name: deck.name,
+        cards: [
+          ...deck.cards.slice(0, index - 1),
+          deck.cards.at(index)!,
+          deck.cards.at(index - 1)!,
+          ...deck.cards.slice(index + 1)
+        ]
+      })
+      return true
+
+    }
+
+    return false
+  }
+
+  moveCardForwardsInDeck(index: number): boolean {
+    const deck = this.#deck()
+    if (deck !== null) {
+
+      if (deck.cards.length <= 1) {
+        return true
+      }
+
+      if (index === deck.cards.length - 1) {
+        const cards = [
+          deck.cards.at(-1)!,
+          ...deck.cards.slice(0, deck.cards.length - 1),
+        ]
+        this.#deck.set({
+          name: deck.name,
+          cards: cards
+        })
+        return true
+      } 
+
+      this.#deck.set({
+        name: deck.name,
+        cards: [
+          ...deck.cards.slice(0, index),
+          deck.cards.at(index + 1)!,
+          deck.cards.at(index)!,
+          ...deck.cards.slice(index + 2)
+        ]
+      })
+      return true
+
+    }
+
+    return false
+  }
+
   
 }

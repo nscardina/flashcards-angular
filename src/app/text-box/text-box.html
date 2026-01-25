@@ -1,7 +1,7 @@
 <textarea #textArea
     [readOnly]="readonly()"
     [classList]="outlined()" 
-    (cdkMenuItemTriggered)="updateText($event)"
+    (blur)="updateText($event)"
     [cdkContextMenuTriggerFor]="rightClickMenu"
 >{{text()}}</textarea>
 

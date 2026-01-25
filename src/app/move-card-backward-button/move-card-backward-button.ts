@@ -5,20 +5,20 @@ import { AppUIState } from '../app-uistate';
 import AppMode from '../AppMode';
 
 @Component({
-  selector: 'fc-delete-current-card-button',
+  selector: 'fc-move-card-backward-button',
   imports: [
     MatIconModule,
     MatMenuModule
   ],
-  templateUrl: './delete-current-card-button.html',
-  styleUrl: './delete-current-card-button.scss',
+  templateUrl: './move-card-backward-button.html',
+  styleUrl: './move-card-backward-button.scss',
 })
-export class DeleteCurrentCardButton {
+export class MoveCardBackwardButton {
 
   appState = inject(AppUIState)
 
-  deleteCard() {
-    this.appState.deleteCurrentCard()
+  moveBackward() {
+    this.appState.moveCurrentCardBackward()
     this.appState.setAppMode(AppMode.EDITING_DECK)
   }
 
