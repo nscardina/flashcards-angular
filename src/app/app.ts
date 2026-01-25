@@ -16,23 +16,25 @@ import { DeckTitleTextField } from './deck-title-text-field/deck-title-text-fiel
 import { Side } from './deck/side';
 import { CardIndexPicker } from './card-index-picker/card-index-picker';
 import { AddCardAfterButton } from './add-card-after-button/add-card-after-button';
+import { DeleteCurrentCardButton } from "./delete-current-card-button/delete-current-card-button";
 
 @Component({
   selector: 'app-root',
   imports: [
-    RouterOutlet, 
-    MatToolbarModule, 
-    MatMenuModule, 
-    MatButtonModule, 
-    MatIconModule, 
-    FileUpload, 
+    RouterOutlet,
+    MatToolbarModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    FileUpload,
     NewDeckButton,
     DeckInteractionArea,
     ChangeLayoutButton,
     DeckTitleTextField,
     CardIndexPicker,
-    AddCardAfterButton
-  ],
+    AddCardAfterButton,
+    DeleteCurrentCardButton
+],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

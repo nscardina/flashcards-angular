@@ -388,5 +388,22 @@ export class DeckState {
     return false
   }
 
+  deleteCard(index: number): boolean {
+    const deck = this.#deck()
+    if (deck !== null) {
+
+      if (deck.cards.length <= 1) {
+        this.newBlankDeck()
+      } else {
+        this.#deck.set({
+          name: deck.name,
+          cards: deck.cards.toSpliced(index, 1)
+        })
+      }
+      return true
+    }
+    return false
+  }
+
   
 }

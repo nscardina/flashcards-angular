@@ -148,5 +148,9 @@ export class AppUIState {
   addBlankCardAfter() {
     this.#deckState.addCard(this.#cardVisible(), Card.makeDefault())
   }
+
+  deleteCurrentCard(): boolean {
+    return this.#deckState.deleteCard(this.#cardVisible())
+  }
   
 }
