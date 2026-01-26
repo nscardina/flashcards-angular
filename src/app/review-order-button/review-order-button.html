@@ -1,0 +1,16 @@
+<button mat-menu-item [matMenuTriggerFor]="changeLayoutMenu">
+    <mat-icon>sort</mat-icon>
+    <span>Change Review Order</span>
+</button>
+
+<mat-menu #changeLayoutMenu="matMenu" xPosition="after">
+
+    @for(order of ReviewOrder; track order) {
+        <button mat-menu-item (click)="setReviewOrder(order)">
+            {{order}}
+        </button>
+    }
+
+    
+    
+</mat-menu>

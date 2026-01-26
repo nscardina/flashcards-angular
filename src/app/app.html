@@ -13,6 +13,10 @@
     <button mat-button [matMenuTriggerFor]="editMenu">
       Edit
     </button>
+
+    <button mat-button [matMenuTriggerFor]="reviewMenu">
+      Review
+    </button>
   </div>
 
   <div class="toolbar-center">
@@ -87,6 +91,11 @@
     Reviewing Deck
   </button>
 </mat-menu>
+
+<mat-menu #reviewMenu="matMenu">
+  <fc-review-order-button />
+</mat-menu>
+
 
 <fc-deck-interaction-area />
 
