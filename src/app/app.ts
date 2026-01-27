@@ -20,6 +20,7 @@ import { DeleteCurrentCardButton } from "./delete-current-card-button/delete-cur
 import { MoveCardBackwardButton } from "./move-card-backward-button/move-card-backward-button";
 import { MoveCardForwardButton } from "./move-card-forward-button/move-card-forward-button";
 import { ReviewOrderButton } from "./review-order-button/review-order-button";
+import { ShowSideButton } from "./show-side-button/show-side-button";
 
 @Component({
   selector: 'app-root',
@@ -39,7 +40,8 @@ import { ReviewOrderButton } from "./review-order-button/review-order-button";
     DeleteCurrentCardButton,
     MoveCardBackwardButton,
     MoveCardForwardButton,
-    ReviewOrderButton
+    ReviewOrderButton,
+    ShowSideButton
 ],
   templateUrl: './app.html',
   styleUrl: './app.scss'

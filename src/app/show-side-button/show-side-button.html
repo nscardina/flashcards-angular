@@ -1,0 +1,16 @@
+<button mat-menu-item [matMenuTriggerFor]="changeLayoutMenu">
+    <mat-icon>sort</mat-icon>
+    <span>Change Side Shown</span>
+</button>
+
+<mat-menu #changeLayoutMenu="matMenu" xPosition="after">
+
+    @for(name of ShowSideProviderNames; track name) {
+        <button mat-menu-item (click)="setShowSide(name)">
+            {{name.charAt(0).toUpperCase() + name.substring(1).toLowerCase()}}
+        </button>
+    }
+
+    
+    
+</mat-menu>
