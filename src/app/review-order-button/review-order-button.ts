@@ -20,7 +20,7 @@ export class ReviewOrderButton {
   #reviewState = inject(ReviewState)
 
   setReviewOrder(order: ReviewOrder) {
-    this.#reviewState.reviewOrder.set(order)
+    this.#reviewState.updateReviewOrder(order)
   }
 
 }

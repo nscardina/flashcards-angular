@@ -1,7 +1,19 @@
-<button matMiniFab class="shrink" id="back-button-container" (click)="appState.viewPreviousCard()">
-    <mat-icon>arrow_back</mat-icon>
-</button>
+@if (appState.appMode() !== AppMode.REVIEWING_DECK) {
+    <button matMiniFab class="shrink" id="back-button-container" (click)="appState.viewPreviousCard()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+}
+
 <fc-card-display id="card-display-container" />
-<button matMiniFab id="forward-button-container" (click)="appState.viewNextCard()">
-    <mat-icon>arrow_forward</mat-icon>
-</button>
+
+@if (appState.appMode() !== AppMode.REVIEWING_DECK) {
+    <button matMiniFab id="forward-button-container" (click)="appState.viewNextCard()">
+        <mat-icon>arrow_forward</mat-icon>
+    </button>
+}
+
+@if (appState.appMode() === AppMode.REVIEWING_DECK && seenQuestionSide()) {
+    <button matFab extended id="forward-button-container" (click)="goToNextCard()">
+        Next
+    </button>
+}

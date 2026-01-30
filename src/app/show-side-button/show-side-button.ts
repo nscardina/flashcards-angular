@@ -20,7 +20,7 @@ export class ShowSideButton {
   #reviewState = inject(ReviewState)
 
   setShowSide(side: ShowSideProviderName) {
-      this.#reviewState.showSide.set(side)
+      this.#reviewState.updateSideShown(side)
     }
 
 }

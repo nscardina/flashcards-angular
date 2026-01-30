@@ -1,12 +1,12 @@
 @switch (boxType()) {
     @case (CardContentDataType.PLAIN_TEXT) {
-        <fc-text-box [boxNumber]="boxNumber()" [(shouldSetChildTextBoxActive)]="shouldSetChildTextBoxActive" />
+        <fc-text-box [boxNumber]="boxNumber()" [side]="side()" [(shouldSetChildTextBoxActive)]="shouldSetChildTextBoxActive" />
     }
     @case (CardContentDataType.IMAGE) {
-        <fc-image-box [boxNumber]="boxNumber()" />
+        <fc-image-box [boxNumber]="boxNumber()" [side]="side()" />
     }
     @case (CardContentDataType.LATEX) {
-        <fc-latex-box [boxNumber]="boxNumber()" [(shouldSetChildTextBoxActive)]="shouldSetChildTextBoxActive" />
+        <fc-latex-box [boxNumber]="boxNumber()" [side]="side()" [(shouldSetChildTextBoxActive)]="shouldSetChildTextBoxActive" />
     }
     @default {
         <fc-set-empty-area-contents-menu [side]="side()" [boxNumber]="boxNumber()" [(shouldSetChildTextBoxActive)]="shouldSetChildTextBoxActive"/>

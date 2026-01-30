@@ -1,137 +1,43 @@
+import { Card } from "./deck/Card";
+import { Deck } from "./deck/deck";
+import { arrayToShuffled } from "array-shuffle"
+
 export enum ReviewOrder {
     IN_ORDER = "In order",
     REVERSE_ORDER = "Reverse order",
     RANDOM = "Random"
 }
 
-export type ReviewOrderProvider = Iterator<number, void> & {
-    peek: () => IteratorResult<number, void>,
-}
+export type ReviewOrderGenerator = Generator<number, null, unknown>
 
-
-export const makeInOrderProvider = (numCards: number): ReviewOrderProvider => {
-    let index = 0;
-    
-    const iterator: ReviewOrderProvider = {
-        next() {
-            if (index < numCards) {
-                return {
-                    value: index++,
-                    done: false,
-                }
-            } else {
-                return {
-                    value: undefined,
-                    done: true,
-                }
-            }
-        },
-        peek() {
-            if (index < numCards) {
-                return {
-                    value: index,
-                    done: false,
-                }
-            } else {
-                return {
-                    value: undefined,
-                    done: true,
-                }
-            }
-        }
-    };
-
-    return iterator;
-};
-
-export const makeReverseOrderProvider = (numCards: number) => {
-    let index = numCards - 1;
-    
-    const iterator: ReviewOrderProvider = {
-        next() {
-            if (index >= 0) {
-                return {
-                    value: index--,
-                    done: false,
-                }
-            } else {
-                return {
-                    value: undefined,
-                    done: true,
-                }
-            }
-        },
-        peek() {
-            if (index >= 0) {
-                return {
-                    value: index,
-                    done: false,
-                }
-            } else {
-                return {
-                    value: undefined,
-                    done: true,
-                }
-            }
-        }
-    };
-
-    return iterator;
-}
-
-export const makeRandomOrderProvider = (numCards: number) => {
-    let used: boolean[] = Array(numCards).fill(false);
-    let numbers: number[] = Array(numCards);
-
-    for (let i = 0; i < numCards; i++) {
-        let index;
-        do { index = Math.floor(Math.random() * numCards); } while (used[index]);
-        
-        used[index] = true;
-        numbers[i] = index;
+export const inOrderGenerator = function*(deck: Deck): ReviewOrderGenerator {
+    for (let i = 0; i < deck.cards.length; i++) {
+        yield i
     }
-
-    let i = 0;
-
-    const iterator: ReviewOrderProvider = {
-        next() {
-            if (i < numbers.length) {
-                return {
-                    value: numbers[i++],
-                    done: false,
-                }
-            } else {
-                return {
-                    value: undefined,
-                    done: true,
-                }
-            }
-        },
-        peek() {
-            if (i < numbers.length) {
-                return {
-                    value: numbers[i],
-                    done: false,
-                }
-            } else {
-                return {
-                    value: undefined,
-                    done: true,
-                }
-            }
-        }
-    }
-
-    return iterator;
+    return null
 }
 
-export const makeReviewOrderProvider = (reviewOrder: ReviewOrder): (numCards: number) => ReviewOrderProvider => {
-    switch (reviewOrder) {
+export const reverseOrderGenerator = function*(deck: Deck): ReviewOrderGenerator {
+    for (let i = deck.cards.length - 1; i >= 0; i--) {
+        yield i
+    }
+    return null
+}
+
+export const randomOrderGenerator = function*(deck: Deck): ReviewOrderGenerator {
+    const indices = deck.cards.map((_, index) => index)
+    yield* arrayToShuffled(indices)
+    return null
+}
+
+export const orderGenerator = (order: ReviewOrder, deck: Deck): ReviewOrderGenerator => {
+    switch (order) {
         case ReviewOrder.IN_ORDER:
-            return makeInOrderProvider;
+            return inOrderGenerator(deck)
         case ReviewOrder.REVERSE_ORDER:
-            return makeReverseOrderProvider;
+            return reverseOrderGenerator(deck)
         case ReviewOrder.RANDOM:
-            return makeRandomOrderProvider;
+            return randomOrderGenerator(deck)
     }
 }
+

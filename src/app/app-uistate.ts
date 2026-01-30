@@ -1,4 +1,4 @@
-import { inject, Injectable, isDevMode, signal, WritableSignal } from '@angular/core';
+import { computed, inject, Injectable, isDevMode, Signal, signal, WritableSignal } from '@angular/core';
 import { DeckState } from './deck-state';
 import { Side } from './deck/side';
 import { CardFace } from './deck/CardFace';
@@ -36,7 +36,6 @@ export class AppUIState {
     if (index >= 0 && index < (this.#deckState.deck()?.cards.length ?? -1)) {
       this.#cardVisible.set(index)
     }
-    this.#cardVisible.set(index)
   }
 
   viewNextCard() {
@@ -57,9 +56,7 @@ export class AppUIState {
     return this.#sideVisible.set(side)
   }
 
-  getCurrentVisibleCard(): Card | null {
-    return this.#deckState.deck()?.cards.at(this.#cardVisible()) ?? null
-  }
+  getCurrentVisibleCard = computed(() => this.#deckState.deck()?.cards.at(this.#cardVisible()) ?? null)
 
   setAppMode(mode: AppMode) {
     return this.#appMode.set(mode)
@@ -73,13 +70,15 @@ export class AppUIState {
     return this.#deckState.createTextArea(this.#cardVisible(), side, box)
   }
 
-  getTextCurrentCard(side: Side, box: BoxNumber): string | null {
-    const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[side]?.box[box]
-    if (TextBox.isTextBox(actualBox)) {
-      return actualBox.text
-    }
+  getTextCurrentCard(side: Side, box: BoxNumber): Signal<string | null> {
+    return computed(() => {
+      const actualBox = this.#deckState.deck()?.cards.at(this.#cardVisible())?.[side]?.box[box]
+      if (TextBox.isTextBox(actualBox)) {
+        return actualBox.text
+      }
 
-    return null
+      return null
+    })
   }
 
   setTextCurrentCard(side: Side, box: BoxNumber, text: string): boolean {
