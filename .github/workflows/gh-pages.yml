@@ -25,9 +25,9 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         env:
-          INPUT_PATH: "dist/"
+          INPUT_PATH: "dist/flashcards-angular/browser/"
         with: 
-          path: "dist/"
+          path: "dist/flashcards-angular/browser/"
 
   Deploy:
     needs: Build
